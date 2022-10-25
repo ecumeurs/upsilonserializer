@@ -1,0 +1,3 @@
+# .\method
+
+[Up](../README.md)
