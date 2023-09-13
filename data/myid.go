@@ -4,8 +4,6 @@ import (
 	"github.com/google/uuid"
 )
 
-//go:generate msgp
-
 type MyID string
 
 // NewId creates a new MyID

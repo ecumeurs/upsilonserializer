@@ -26,13 +26,17 @@ func (js JsonSerializer) Deserialize(registry serializable.SerializableRegistry,
 		return cm, err
 	}
 
+	// WARN: Target, Content & Meta may be nil ... it depends on the method called.
+	// In that case, it's up to caller to provide a valid struct method to the deserialized message based on the method called.
+
+	// NOTE: Create a recipient for the message's target (if any)
 	cm.Target = registry.Create(received.TargetMethod)
 	if cm.Target != nil {
 		err = json.Unmarshal(received.Target, cm.Target)
 		if err != nil {
 			logrus.WithFields(logrus.Fields{
 				"component": "serializer",
-				"type":      "mpack",
+				"type":      "json",
 			}).WithError(err).Error("Error deserializing target")
 			return cm, err
 		}
@@ -41,12 +45,12 @@ func (js JsonSerializer) Deserialize(registry serializable.SerializableRegistry,
 
 			logrus.WithFields(logrus.Fields{
 				"component": "serializer",
-				"type":      "mpack",
+				"type":      "json",
 			}).Error("Target not found")
 		} else {
 			logrus.WithFields(logrus.Fields{
 				"component": "serializer",
-				"type":      "mpack",
+				"type":      "json",
 			}).Error("Target method is empty")
 		}
 	}
@@ -57,14 +61,14 @@ func (js JsonSerializer) Deserialize(registry serializable.SerializableRegistry,
 		if err != nil {
 			logrus.WithFields(logrus.Fields{
 				"component": "serializer",
-				"type":      "mpack",
+				"type":      "json",
 			}).WithError(err).Error("Error deserializing content")
 			return cm, err
 		}
 	} else {
 		logrus.WithFields(logrus.Fields{
 			"component": "serializer",
-			"type":      "mpack",
+			"type":      "json",
 		}).Error("Content not found")
 	}
 
@@ -74,14 +78,14 @@ func (js JsonSerializer) Deserialize(registry serializable.SerializableRegistry,
 		if err != nil {
 			logrus.WithFields(logrus.Fields{
 				"component": "serializer",
-				"type":      "mpack",
+				"type":      "json",
 			}).WithError(err).Error("Error deserializing meta")
 			return cm, err
 		}
 	} else {
 		logrus.WithFields(logrus.Fields{
 			"component": "serializer",
-			"type":      "mpack",
+			"type":      "json",
 		}).Error("Meta not found")
 	}
 

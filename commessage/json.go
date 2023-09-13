@@ -13,12 +13,12 @@ import (
 type JSONSendComMessage struct {
 	ID           data.MyID
 	EmitedAt     time.Time
-	Target       json.RawMessage
-	Content      json.RawMessage
-	Meta         json.RawMessage
-	TargetMethod string
-	ContentType  string
-	MetaType     string
+	Target       json.RawMessage `json:"Target,omitempty"`
+	Content      json.RawMessage `json:"Content,omitempty"`
+	Meta         json.RawMessage `json:"Meta,omitempty"`
+	TargetMethod string          // The method to call on the target
+	ContentType  string          // struct type of content
+	MetaType     string          // struct type of meta
 	HasError     bool
 	ErrorMessage string
 	ErrorKey     string
