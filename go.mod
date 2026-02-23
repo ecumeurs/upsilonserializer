@@ -1,6 +1,6 @@
 module github.com/ecumeurs/upsilonserializer
 
-go 1.19
+go 1.25
 
 require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
